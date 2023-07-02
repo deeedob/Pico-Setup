@@ -1,0 +1,18 @@
+{
+  "version": 6,
+  "configurePresets": [
+  {
+    "name": "pico-starter",
+      "description": "Minimal Starter Project",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/starter",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "~/.platformio/packages/toolchain-gccarmnoneeabi-teensy/bin/arm-none-eabi-gcc",
+        "CMAKE_CXX_COMPILER": "~/.platformio/packages/toolchain-gccarmnoneeabi-teensy/bin/arm-none-eabi-g++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "WARNINGS_ARE_ERRORS": "ON"
+      }
+    }
+  ]
+}
+

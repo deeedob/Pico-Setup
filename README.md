@@ -1,4 +1,4 @@
-# Raspberry Pi Pico Setup 
+# Raspberry Pi Pico Setup
 
 Install the sdk and picotool from AUR
 
@@ -17,10 +17,12 @@ SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"000a\", MODE=
 SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"2e8a\", ATTRS{idProduct}==\"000a\", MODE=\"0666\"" > /etc/udev/rules.d/11-pico.rules'
 ```
 
-If you're like me and want to develop in an IDE we can setup automatic upload without re-attaching!
-Just specify a custom executable where the working directory is the build dir of the project.
-Make sure to use picotool >= 1.1 for that.
+We use `picotool` to upload to our device. If you want to upload to your
+PICO, then execute the following command, or target, from your preferred
+editor:
 
-```bash
-/usr/bin/picotool load rpiPICOStarter.uf2 -f
 ```
+# Build and upload to the PICO
+cmake --preset pico-starter; cmake --build build/starter --target rpi_upload_project
+```
+

@@ -1,21 +1,34 @@
-#include <stdio.h>
-#include "pico/stdlib.h"
+#include <hardware/gpio.h>
+#include <pico/stdlib.h>
+
+#include <iostream>
+#include <ctime>
+
+void blink_for(uint8_t pin, uint32_t time1, uint32_t  time2 )
+{
+    gpio_put(pin, true);
+    sleep_ms(time1);
+    gpio_put(pin, false);
+    sleep_ms(time2);
+}
 
 int main() {
     stdio_usb_init();
     stdio_usb_connected();
 
-    const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
+    // Setup pins
+    const uint led_pin_int = PICO_DEFAULT_LED_PIN;
+    gpio_init(led_pin_int);
+    gpio_set_dir(led_pin_int, GPIO_OUT);
 
-    while (true) {
+    // Setup rand
+    std::srand(static_cast<uint>(std::time(nullptr)));
+    auto get_rand = [] { return static_cast<uint32_t>(std::rand() % 1000); };
+
+   while (true) {
         // This will show up on ttyACMX
-        printf("Hello\n");
-        gpio_put(LED_PIN, 1);
-        sleep_ms(1000);
-        gpio_put(LED_PIN, 0);
-        sleep_ms(1000);
+        std::cout << "Hello Pico" << std::endl;
+        blink_for(led_pin_int, get_rand(), get_rand());
     }
 
     return 0;
